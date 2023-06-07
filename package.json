@@ -1,0 +1,31 @@
+{
+  "name": "tangocho",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/app.js",
+  "author": "",
+  "license": "UNLICENSED",
+  "private": true,
+  "volta": {
+    "node": "18.16.0",
+    "npm": "9.5.1"
+  },
+  "scripts": {
+    "build": "run-p server:start sass:build",
+    "watch": "run-p server:watch sass:watch",
+    "server:start": "node ./src/app.js",
+    "server:watch": "nodemon ./src/app.js",
+    "sass:watch": "sass --watch --update --no-source-map src/style:public/css",
+    "sass:build": "sass --no-source-map --style=compressed src/style:public/css"
+  },
+  "dependencies": {
+    "dotenv": "^16.1.4",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22",
+    "npm-run-all": "^4.1.5",
+    "sass": "^1.62.1"
+  }
+}
