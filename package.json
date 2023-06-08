@@ -11,12 +11,14 @@
     "npm": "9.5.1"
   },
   "scripts": {
-    "build": "run-p server:start sass:build",
-    "watch": "run-p server:watch sass:watch",
+    "build": "run-p scss:lint scss:build js:lint server:start",
+    "watch": "run-p server:watch scss:watch",
     "server:start": "node ./src/app.js",
     "server:watch": "nodemon ./src/app.js",
-    "sass:watch": "sass --watch --update --no-source-map src/style:public/css",
-    "sass:build": "sass --no-source-map --style=compressed src/style:public/css"
+    "scss:watch": "sass --watch --update --no-source-map src/style:public/css",
+    "scss:build": "sass --no-source-map --style=compressed src/style:public/css",
+    "scss:lint": "stylelint src/**/*.scss",
+    "js:lint": "eslint src/**/*.js public/js/**/*.js --fix --fix-type layout"
   },
   "dependencies": {
     "dotenv": "^16.1.4",
@@ -24,8 +26,11 @@
     "express": "^4.18.2"
   },
   "devDependencies": {
+    "eslint": "^8.42.0",
     "nodemon": "^2.0.22",
     "npm-run-all": "^4.1.5",
-    "sass": "^1.62.1"
+    "sass": "^1.62.1",
+    "stylelint": "^15.7.0",
+    "stylelint-config-standard-scss": "^9.0.0"
   }
 }

@@ -29,3 +29,11 @@ npm run build
 ```
 npm run watch
 ```
+
+## .env
+
+```
+STATIC_PATH_PREFIX="/assets"
+STATIC_DIR_PATH="./public"
+VIEWS_DIR_PATH="./src/views"
+```
