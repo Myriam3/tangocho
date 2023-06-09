@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="<%= item.lang %>">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title><%= item.word %> - Tangocho</title>
+        <link rel="stylesheet" href="/assets/css/index.css" />
+        <script src="/assets/js/index.js" type="module"></script>
+    </head>
+    <body>
+        <h1><%= item.word %></h1>
+
+        <% if (item.labels.length) { %>
+        <ul>
+            <% item.labels.forEach(label => { %>
+            <li>(<%= label %>)</li>
+            <% }); %>
+        </ul>
+        <% } %>
+        <!---->
+
+        <% item.translations.forEach(item => { %>
+        <span><%= item.lang %>:</span>
+        <a href="/words/<%= item.id %>" lang="<%= item.lang %>">
+            <%= item.word %>
+        </a>
+        <% }); %>
+
+        <dl>
+            <dt>Type:</dt>
+            <dd><%= item.type %></dd>
+            <% if (item.sentences.length) { %>
+            <dt>Examples:</dt>
+            <dd>
+                <ul>
+                    <% item.sentences.forEach(sentence => { %>
+                    <li><%= sentence %></li>
+                    <% }); %>
+                </ul>
+            </dd>
+            <% } %>
+        </dl>
+
+        <% if (item.concepts.length) { %>
+        <h2>Related</h2>
+
+        <% item.concepts.forEach(concept => { %>
+        <div>
+            <h3><%= concept.name %></h3>
+            <ul>
+                <% concept.related.forEach(item => { %>
+                <li><a href="/words/<%= item.id %>"><%= item.word %></a></li>
+                <% }); %>
+            </ul>
+        </div>
+        <% }); %>
+        <!---->
+        <% } %>
+    </body>
+</html>
