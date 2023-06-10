@@ -19,12 +19,21 @@
         <% } %>
         <!---->
 
-        <% item.translations.forEach(item => { %>
-        <span><%= item.lang %>:</span>
-        <a href="/words/<%= item.id %>" lang="<%= item.lang %>">
-            <%= item.word %>
-        </a>
-        <% }); %>
+        <% if (item.translations.length) { %>
+        <ul>
+            <% item.translations.forEach(translation => { %>
+            <li>
+                <span><%= translation.lang %>:</span>
+                <a
+                    href="/words/<%= translation.id %>"
+                    lang="<%= translation.lang %>"
+                >
+                    <%= translation.word %>
+                </a>
+            </li>
+            <% }); %>
+        </ul>
+        <% } %>
 
         <dl>
             <dt>Type:</dt>
@@ -43,17 +52,30 @@
 
         <% if (item.concepts.length) { %>
         <h2>Related</h2>
-
-        <% item.concepts.forEach(concept => { %>
-        <div>
-            <h3><%= concept.name %></h3>
-            <ul>
-                <% concept.related.forEach(item => { %>
-                <li><a href="/words/<%= item.id %>"><%= item.word %></a></li>
-                <% }); %>
-            </ul>
-        </div>
-        <% }); %>
+        <ul>
+            <% item.concepts.forEach(concept => { %>
+            <li>
+                <% if (concept.parent === item.id) { %>
+                <h3><%= concept.name %></h3>
+                <ul>
+                    <% concept.related.forEach(relatedItem => { %>
+                    <!---->
+                    <% if (item.id !== relatedItem.id) { %>
+                    <li>
+                        <a href="/words/<%= relatedItem.id %>">
+                            <%= relatedItem.word %>
+                        </a>
+                    </li>
+                    <% } %>
+                    <!---->
+                    <% }); %>
+                </ul>
+                <% } else { %>
+                <p><%= concept.name %></p>
+                <% } %>
+            </li>
+            <% }); %>
+        </ul>
         <!---->
         <% } %>
     </body>

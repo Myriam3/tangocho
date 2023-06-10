@@ -1,7 +1,17 @@
 const word = require('./../../models/word');
 
 module.exports = (req, res) => {
-    const data = word.getItem(req.params.id);
+    const id = Number(req.params.id);
 
-    res.render('words/item', {item: data});
+    if (!id) {
+        res.render('404');
+    }
+
+    word.getItem(id).then((word) => {
+        if (word) {
+            res.render('words/item', {item: word});
+        } else {
+            res.render('404');
+        }
+    }); //TODO catch(err)
 };
