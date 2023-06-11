@@ -9,10 +9,27 @@
     </head>
     <body>
         <h1>Words <%= lang %></h1>
-        <ul>
-            <% words.forEach(word => { %>
-            <li><%- include('./list-item', {item: word}); %></li>
-            <% }); %>
-        </ul>
+
+        <div>
+            <%- include('./form-search'); %>
+            <!---->
+            <%- include('./form-labels'); %>
+            <!---->
+            <%- include('./form-concepts'); %>
+        </div>
+
+        <div>
+            <ul>
+                <% words.forEach((word) => { %>
+                <li
+                    data-labels="<%= Array.from(word.labels).join() %>"
+                    data-concepts="<%= Array.from(word.concepts).join() %>"
+                >
+                    <%- include('./list-item', {item: word}); %>
+                </li>
+                <% }); %>
+            </ul>
+        </div>
+        <script></script>
     </body>
 </html>

@@ -1,7 +1,7 @@
-const mysql = require('mysql');
+import mysql from 'mysql';
 let pool = null;
 
-module.exports = {
+export default {
     createDBPool: () => {
         pool = mysql.createPool({
             connectionLimit: 10,

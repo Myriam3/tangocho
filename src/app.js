@@ -1,11 +1,14 @@
-const express = require('express');
+import express from 'express';
+import dotenv from 'dotenv';
+import path from 'path';
+import db from './db.js';
+import indexRouter from './routes/index.js';
+import wordsRouter from './routes/words.js';
+
 const app = express();
-require('dotenv').config();
-const path = require('path');
 const port = process.env.PORT || 3000;
-const indexRouter = require('./routes/index');
-const wordsRouter = require('./routes/words');
-const db = require('./db.js');
+
+dotenv.config();
 
 // Template engine
 app.set('views', `${process.env.SRC_DIR_PATH}/views`);
@@ -18,10 +21,11 @@ app.use(
 );
 
 // DB
-// TODO: erros
+// TODO: errors
 db.createDBPool();
 
 // Routes
+
 app.use('/', indexRouter);
 app.use('/words', wordsRouter);
 

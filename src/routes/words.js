@@ -1,7 +1,8 @@
-const express = require('express');
+import express from 'express';
+import wordController from './../controllers/words/item.js';
+import wordListController from './../controllers/words/list.js';
+
 const router = express.Router();
-const wordController = require('./../controllers/words/item');
-const wordListController = require('./../controllers/words/list');
 
 router.get('/', (req, res) => {
     res.render('words/');
@@ -19,4 +20,4 @@ router.get('/:id', (req, res) => {
     wordController(req, res);
 });
 
-module.exports = router;
+export default router;

@@ -1,10 +1,11 @@
-const word = require('./../../models/word');
+import word from './../../models/word.js';
 
-module.exports = (req, res) => {
+export default (req, res) => {
     const id = Number(req.params.id);
 
     if (!id) {
         res.render('404');
+        return;
     }
 
     word.getItem(id).then((word) => {

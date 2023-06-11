@@ -1,11 +1,18 @@
-const wordList = require('./../../models/wordList');
+import wordList from './../../models/wordList.js';
 
-module.exports = (req, res, lang) => {
-    // if (!(req.params.lang === 'en' || req.params.lang === 'ja')) {
-    //     res.render('404');
-    // }
+export default (req, res, lang) => {
+    wordList.getList(lang).then((list) => {
+        let labels = [];
+        let concepts = [];
 
-    const data = wordList.getList(lang);
+        list.forEach((item) => {
+            labels.push(...Array.from(item.labels));
+            concepts.push(...Array.from(item.concepts));
+        });
 
-    res.render('words/list', {words: data, lang});
+        labels = new Set(labels);
+        concepts = new Set(concepts);
+
+        res.render('words/list', {words: list, lang, labels, concepts});
+    }); //TODO catch(err)
 };

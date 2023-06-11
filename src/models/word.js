@@ -1,4 +1,5 @@
-const db = require('./../db.js');
+import db from './../db.js';
+import utilities from './../utilities/index.js';
 
 const queryWord = async (id) => {
     const data = await new Promise((resolve, reject) => {
@@ -30,9 +31,7 @@ const queryWord = async (id) => {
 const queryWordTranslations = async (id, src) => {
     const data = await new Promise((resolve, reject) => {
         const pool = db.getPool();
-        // TODO settings
-        // TODO 3 languages
-        const target = src === 'ja' ? 'en' : 'ja';
+        const target = utilities.getTargetLanguage(src);
 
         pool.query(
             `SELECT words.id AS id,
@@ -155,7 +154,7 @@ const queryConceptWords = async (id, lang) => {
     return data;
 };
 
-module.exports = {
+export default {
     getItem: async (id) => {
         const result = await queryWord(id);
 
@@ -165,6 +164,7 @@ module.exports = {
 
         const wordItem = result[0];
 
+        // TODO from queryWord
         const labels = await queryWordLabels(id);
         wordItem.labels = labels.map((item) => item.label);
 

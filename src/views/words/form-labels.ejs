@@ -1,0 +1,25 @@
+<form>
+    <% if (labels.size > 1) { %>
+    <fieldset>
+        <legend>Labels:</legend>
+
+        <div>
+            <input
+                type="radio"
+                name="label"
+                id="label-all"
+                value="all"
+                checked
+            />
+            <label for="label-all">All</label>
+        </div>
+
+        <% labels.forEach((label, i) => { %>
+        <div>
+            <input type="radio" name="label" id="label-<%= `${i + 1}` %>" />
+            <label for="label-<%= `${i + 1}` %>"><%= label %></label>
+        </div>
+        <% }); %>
+    </fieldset>
+    <% } %>
+</form>
