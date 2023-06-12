@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import path from 'path';
 import db from './db.js';
+import apiRouter from './routes/api.js';
 import indexRouter from './routes/index.js';
 import wordsRouter from './routes/words.js';
 
@@ -28,6 +29,7 @@ db.createDBPool();
 
 app.use('/', indexRouter);
 app.use('/words', wordsRouter);
+app.use('/api', apiRouter);
 
 // 404
 app.use(function (req, res) {

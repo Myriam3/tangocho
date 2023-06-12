@@ -6,8 +6,8 @@ export default (req, res, lang) => {
         let concepts = [];
 
         list.forEach((item) => {
-            labels.push(...Array.from(item.labels));
-            concepts.push(...Array.from(item.concepts));
+            labels.push(...item.labels);
+            concepts.push(...item.concepts);
         });
 
         labels = new Set(labels);

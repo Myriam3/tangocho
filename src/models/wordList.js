@@ -45,19 +45,23 @@ export default {
                     id: current.id,
                     lang: current.lang,
                     word: current.word,
-                    labels: new Set(),
-                    concepts: new Set(),
+                    labels: [],
+                    concepts: [],
                 };
 
                 list.push(wordItem);
             }
 
             if (current.label) {
-                wordItem.labels.add(current.label);
+                wordItem.labels = Array.from(
+                    new Set(wordItem.labels).add(current.label)
+                );
             }
 
             if (current.concept) {
-                wordItem.concepts.add(current.concept);
+                wordItem.concepts = Array.from(
+                    new Set(wordItem.concepts).add(current.concept)
+                );
             }
 
             return list;
