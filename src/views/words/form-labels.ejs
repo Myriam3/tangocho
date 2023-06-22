@@ -1,8 +1,9 @@
 <form>
-    <% if (labels.size > 1) { %>
+    <% if (labels.size) { %>
     <fieldset>
         <legend>Labels:</legend>
 
+        <% if (labels.size > 1) { %>
         <div>
             <input
                 type="radio"
@@ -13,10 +14,13 @@
             />
             <label for="label-all">All</label>
         </div>
+        <% } %>
+        <!---->
 
         <% labels.forEach((label, i) => { %>
         <div>
-            <input type="radio" name="label" id="label-<%= `${i + 1}` %>" />
+            <input type="radio" name="label" id="label-<%= `${i + 1}` %>" <% if
+            (labels.size === 1) { %> <%= 'checked' %> <% } %> />
             <label for="label-<%= `${i + 1}` %>"><%= label %></label>
         </div>
         <% }); %>

@@ -71,7 +71,9 @@
                     <% }); %>
                 </ul>
                 <% } else { %>
-                <p><%= concept.name %></p>
+                <a href="/words/concept/<%= concept.id %>">
+                    <%= concept.name %>
+                </a>
                 <% } %>
             </li>
             <% }); %>
